@@ -1,0 +1,85 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Validation Styles */
+
+p.invalid label,
+p.invalid input {
+  color: hsl(0, 50%, 50%);
+}
+
+p.invalid input {
+  border-color: hsl(0, 50%, 75%);
+}
+
+p.invalid input:focus {
+  border-color: hsl(0, 50%, 50%);
+}
+
+/* Messages */
+
+p.message {
+  border: 1px solid transparent;
+  border-radius: 5px;
+  
+  font-size: 14px;
+  
+  display: none;
+  margin: 0 auto 10px;
+  padding: 10px 15px;
+  width: 320px;
+}
+
+p.message.success {
+  border-color: hsl(80, 65%, 35%);
+  
+  background-color: hsl(80, 35%, 75%);
+  box-shadow: inset 0 -3px 0 hsl(80, 35%, 65%);
+  
+  color: hsl(80, 65%, 25%);
+}
+
+p.message.invalid {
+  border-color: hsl(0, 50%, 40%);
+  
+  background-color: hsl(0, 65%, 85%);
+  box-shadow: inset 0 -3px 0 hsl(0, 65%, 78%);
+  
+  color: hsl(0, 50%, 40%);
+}
+
+body.successful p.message.success,
+body.invalid p.message.invalid {
+  display: block;
+}
+
+/* Response Text */
+
+pre {
+  width: 480px;
+}
+
+code {
+  font-family: 'Source Code Pro';
+  font-size: 12px;
+  
+  display: block;
+  margin: 5px 0;
+  overflow: hidden;
+  white-space: pre-wrap;
+}

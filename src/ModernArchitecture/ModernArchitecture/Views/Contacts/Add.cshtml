@@ -1,0 +1,79 @@
+﻿@model ModernArchitecture.Models.ContactViewModel
+@{
+	ViewBag.Title = "Add";
+}
+
+<h2>Add</h2>
+
+<p class="invalid message">Uh-oh; something's wrong.</p>
+<p class="success message">Everything's good!</p>
+<form method="post">
+	<fieldset>
+		<legend>Contact Details</legend>
+		<p>
+			@Html.LabelFor(x => x.Name)
+			@Html.TextBoxFor(x => x.Name, new { placeholder = "Tiffany M. Sample" })
+		</p>
+		<p>
+			@Html.LabelFor(x => x.Email)
+			@Html.TextBoxFor(x => x.Email, new { placeholder = "tiffany@sampleco.com" })
+		</p>
+		<p>
+			@Html.LabelFor(x => x.DateOfBirth)
+			@Html.TextBoxFor(x => x.DateOfBirth, new { placeholder = "MM/DD/YYYY" })
+		</p>
+		<p>
+			@Html.LabelFor(x => x.PhoneNumber)
+			@Html.TextBoxFor(x => x.PhoneNumber, new { placeholder = "999-555-1212" })
+		</p>
+	</fieldset>
+	<button type="submit">Save</button>
+</form>
+<pre><code class="response">(No response body)</code></pre>
+
+<script>
+	$("form").on("submit", function () {
+
+		var request,
+			$page = $('body'),
+			$form = $(this),
+			$response = $('.response'),
+			data = $form.serialize();
+
+		request = $.ajax({
+			type: 'post',
+			data: data
+		});
+
+		request.fail(function (xhr) {
+			var response, i;
+
+			$form.find('p.invalid').removeClass('invalid');
+
+			if (xhr.status === 400) {
+				response = JSON.parse(xhr.responseText);
+				var fields = Object.keys(response);
+				$response.text(vkbeautify.json(xhr.responseText, 2));
+
+				fields.forEach(function (field) {
+					if (response[field].Errors && response[field].Errors.length > 0) {
+						$('[name=' + field + ']')
+							.closest('p')
+							.addClass('invalid');
+					}
+				});
+			}
+
+			$page.removeClass('successful').addClass('invalid');
+		});
+
+		request.success(function () {
+			$form.find('p.invalid').removeClass('invalid');
+			$page.removeClass('invalid').addClass('successful');
+			$response.text('(No response body)');
+		});
+
+		return false;
+
+	});
+</script>
