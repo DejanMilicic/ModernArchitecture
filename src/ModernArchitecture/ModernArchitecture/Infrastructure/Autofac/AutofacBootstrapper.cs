@@ -14,6 +14,7 @@ namespace ModernArchitecture.Infrastructure.Autofac
 			var builder = new ContainerBuilder();
 
 			builder.RegisterModule(new MvcModule());
+			builder.RegisterModule(new MediatrModule());
 
 			// register all other classes that are implementing interfaces
 			builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).AsImplementedInterfaces();
